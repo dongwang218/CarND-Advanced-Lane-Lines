@@ -150,6 +150,18 @@ def main(args):
     binary = binarize(dst)
     view, _ = birdeye_view(binary)
     left_fit, right_fit, out_img = fit_lines(view, True)
+    #plt.figure(1)
+    f, ax = plt.subplots(1, 3)
+    f.set_facecolor('white')
+    ax[0].set_title('input_frame')
+    ax[0].imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    ax[1].set_title('binarize')
+    ax[1].imshow(binary, cmap='gray')
+    ax[2].set_title('lane')
+    ax[2].imshow(out_img)
+    ax[2].set_xlim(0, 1280)
+    ax[2].set_ylim(720, 0)
+    plt.show()
     cv2.imwrite('/tmp/lane_%02d.png' % i, out_img)
 
 if __name__ == '__main__':
